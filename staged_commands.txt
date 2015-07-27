@@ -1,0 +1,1 @@
+ffmpeg -i IMG_1600.MOV -crf 30 -threads 2 IMG_1600.mp4
