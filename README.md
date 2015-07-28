@@ -21,7 +21,9 @@ It consists of:
 4. A simple shell script that will allow the process to be executed in one command.
 
 As written, it's set up to convert .mov files to .mp4, mostly for file size reduction.
-The python script is very simple, and the comments explain where to modify the script for different file types / etc.
+The python script is very simple.
+My comments explain where to modify the script for different file types etc.
+Check the ffmpeg documentation for your desired conversion, and just make sure the command in the script matches what you want before running.
 
 Once you've modified the python script as necessary, drop your batch of video files into the Batch directory, then simply run the shell script!
 You'll have to clean out the pre-converted video files on your own, or they'll be re-converted every time you run the script.
