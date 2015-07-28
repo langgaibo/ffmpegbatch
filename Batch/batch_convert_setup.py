@@ -3,7 +3,7 @@ from os import listdir
 from os.path import isfile, join
 
 # Make sure to specify the absolute path to /Batch in both places here.
-contents = [ f for f in listdir('/Users/gabe/Movies/Bucket/Batch') if isfile(join('/Users/gabe/Movies/Bucket/Batch',f))]
+contents = [ f for f in listdir('.../Batch') if isfile(join('.../Batch',f))]
 
 print contents
 print "\n\n"
