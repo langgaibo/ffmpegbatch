@@ -13,7 +13,7 @@ cleaned = []
 upper = filter(lambda m: '.MOV' in m, contents)
 
 for f in upper:
-    undered = f.replace(" ", "_")
+    undered = f.replace(" ", "\ ")
     cleaned.append(undered)
 
 # In my common use case, different apple devices result in different caps
@@ -21,7 +21,7 @@ for f in upper:
 lower = filter(lambda m: '.mov' in m, contents)
 
 for f in lower:
-    undered = f.replace(" ", "_")
+    undered = f.replace(" ", "\ ")
     cleaned.append(undered)
 
 # Below is my most common argument set for ffmpeg. Please review the ffmpeg
