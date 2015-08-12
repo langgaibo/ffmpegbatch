@@ -1,4 +1,5 @@
-# Written off the cuff by Gabe Langton 2015
+# coding: utf8
+# 朗盖博 2015
 from os import listdir
 from os.path import isfile, join
 
