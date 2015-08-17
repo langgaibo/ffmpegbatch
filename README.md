@@ -9,7 +9,8 @@ For compiling on other OS,  see ffmpeg compilation guide here: https://trac.ffmp
 1. Put the containing folder "Batch" in a convenient directory you will use for converting video files in batch form.
 2. Modify the batch_convert_setup.py script to include your absolute path to the Batch folder.
 3. Make sure the ffmpeg command to be applied in the python script is correct for the file types you'll be converting.
-4. Chmod +x the shell script.
+4. Modify the shell script batch_time.sh to include the absolute path to the Batch directory.
+5. Chmod u+x the shell script and put it somewhere in your PATH if you wish to run from anywhere in the CLI.
 
 ### How to run ###
 This repo should function as a standalone bucket for converting videos.
@@ -22,8 +23,8 @@ It consists of:
 
 As written, it's set up to convert .mov files to .mp4, mostly for file size reduction.
 The python script is very simple.
-My comments explain where to modify the script for different file types etc.
+My comments explain where to modify the python and shell scripts for different file types etc.
 Check the ffmpeg documentation for your desired conversion, and just make sure the command in the script matches what you want before running.
 
-Once you've modified the python script as necessary, drop your batch of video files into the Batch directory, then simply run the shell script!
+Once you've modified the python and shell scripts as necessary, drop your batch of video files into the Batch directory, then simply run the shell script!
 You'll have to clean out the pre-converted video files on your own, or they'll be re-converted every time you run the script.
