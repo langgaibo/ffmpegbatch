@@ -35,10 +35,19 @@ batch_text = open('staged_commands.txt', 'w')
 for n in cleaned:
 
     if ".MOV" in n:
-        line = 'ffmpeg -i %s -crf 30 -threads 2 %s\n' %(n, n.replace(".MOV", ".mp4"))
+        # Write the new output video to a subdirectory
+        line = 'ffmpeg -i %s -crf 30 -threads 2 ./converted/%s\n' %(n, n.replace(".MOV", ".mp4"))
         batch_text.write(line)
+        # And dump the original file into another subdirectory, so there's less management
+        # or overwriting - alternatively you can just delete the originals here if you won't need
+        # them again.
+        sweep = 'mv %s ./originals/%s\n' % (n, n)
+        batch_text.write(sweep)
 
     elif ".mov" in n:
-        line = 'ffmpeg -i %s -crf 30 -threads 2 %s\n' %(n, n.replace(".mov", ".mp4"))
+        line = 'ffmpeg -i %s -crf 30 -threads 2 ./converted/%s\n' %(n, n.replace(".mov", ".mp4"))
         batch_text.write(line)
+        sweep = 'mv %s ./originals/%s\n' % (n, n)
+        batch_text.write(sweep)
+
 batch_text.close()
