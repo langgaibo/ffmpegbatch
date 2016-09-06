@@ -3,42 +3,32 @@
 from os import listdir
 from os.path import isfile, join
 
-# Make sure to specify the absolute path to /Batch in both places here.
+# list all the filenames in the source file directory.
+# REPLACE '...' with the absolute path to the Batch directory in both places in this line!
 contents = [ f for f in listdir('.../Batch') if isfile(join('.../Batch',f))]
 
-# Modify these cleaners with the video file extension of your choice.
-# Mine handle capitalization and spaces, probably not elegantly
-# Make sure to change the extension below, in the ffmpeg arguments %s substitution
+# make an empty bucket to fill with normalized filenames
 cleaned = []
 
+# escape spaces in filenames
 upper = filter(lambda m: '.MOV' in m, contents)
-
 for f in upper:
-    undered = f.replace(" ", "\ ")
-    cleaned.append(undered)
+    despaced = f.replace(" ", "\ ")
+    cleaned.append(despaced)
 
-# In my common use case, different apple devices result in different caps
-# for the .mov extension... so this just normalizes them into a single list.
+# normalize lowercase filename extensions
 lower = filter(lambda m: '.mov' in m, contents)
-
 for f in lower:
-    undered = f.replace(" ", "\ ")
-    cleaned.append(undered)
+    uppered = f.replace(".mov", ".MOV")
+    despaced = uppered.replace(" ", "\ ")
+    cleaned.append(despaced)
 
-# Below is my most common argument set for ffmpeg. Please review the ffmpeg
-# documentation and substitute your own arguments for your own batch.
-# Especially note that the ""-crf" option is not universal. There are other
-# quality commands for other file types!!!
-
-# Opens and overwrites the contents of the commands file
+# open and overwrite a text file with a list of ffmpeg commands
 batch_text = open('staged_commands.txt', 'w')
 for n in cleaned:
-
-    if ".MOV" in n:
-        line = 'ffmpeg -i %s -crf 30 -threads 2 %s\n' %(n, n.replace(".MOV", ".mp4"))
-        batch_text.write(line)
-
-    elif ".mov" in n:
-        line = 'ffmpeg -i %s -crf 30 -threads 2 %s\n' %(n, n.replace(".mov", ".mp4"))
-        batch_text.write(line)
+    # IMPORTANT: see ffmpeg documentation for guidance on quality settings.
+    # here, '-crf 26' represents a high compression level, at the expense of slight degradation in video quality.
+    # Normal "sane" range for -crf is 18 (visually lossless) to 28 (often 10x filesize reduction with acceptable quality)
+    line = 'ffmpeg -i %s -crf 26 -threads 2 %s\n' %(n, n.replace(".MOV", ".mp4"))
+    batch_text.write(line)
 batch_text.close()
